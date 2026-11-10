@@ -1,0 +1,36 @@
+# Выпуск с установщиком и автообновлением (Velopack):
+# git tag v1.2.0 && git push --tags → тесты → Setup.exe + пакеты обновлений → GitHub Releases.
+# Установленная программа сама находит новую версию (UpdateService).
+name: release
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Тесты
+        run: dotnet test --solution StarterApp.slnx -c Release
+      - name: Сборка
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          dotnet publish src/StarterApp/StarterApp.csproj -c Release -p:Version=$version -o publish
+      - name: Установщик и обновления
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          $repo = "https://github.com/${{ github.repository }}"
+          dotnet tool install -g vpk --version 1.2.161
+          # прошлые выпуски нужны, чтобы собрать разностные обновления
+          vpk download github --repoUrl $repo --token ${{ secrets.GITHUB_TOKEN }}
+          vpk pack --packId StarterApp --packVersion $version --packDir publish --mainExe StarterApp.exe --packTitle "StarterApp"
+          vpk upload github --repoUrl $repo --publish --releaseName "StarterApp $version" --tag ${{ github.ref_name }} --token ${{ secrets.GITHUB_TOKEN }}

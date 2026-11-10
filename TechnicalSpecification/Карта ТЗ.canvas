@@ -1,0 +1,26 @@
+{
+	"nodes":[
+		{"id":"passport","type":"file","file":"00 Паспорт.md","x":560,"y":-520,"width":400,"height":400,"color":"1"},
+		{"id":"legend","type":"text","text":"## Как пользоваться картой\n- Карточка = заметка ТЗ. Двойной клик — открыть.\n- Заполняйте сверху вниз: Паспорт → Продукт → Данные → Выпуск.\n- Двойной клик по пустому месту — своя карточка (идея, вопрос).\n- Перетащите заметку из списка слева — новая карточка-ссылка.\n- Тяните от края карточки — стрелка-связь.","x":0,"y":-520,"width":500,"height":260,"color":"4"},
+		{"id":"g0","type":"group","x":0,"y":0,"width":440,"height":960,"label":"Продукт","color":"5"},
+		{"id":"g0f0","type":"file","file":"01 Идея и пользователи.md","x":20,"y":40,"width":400,"height":260},
+		{"id":"g0f1","type":"file","file":"02 Окна и вкладки.md","x":20,"y":340,"width":400,"height":260},
+		{"id":"g0f2","type":"file","file":"05 Функции.md","x":20,"y":640,"width":400,"height":260},
+		{"id":"g1","type":"group","x":500,"y":0,"width":440,"height":960,"label":"Данные","color":"6"},
+		{"id":"g1f0","type":"file","file":"03 Источники данных.md","x":520,"y":40,"width":400,"height":260},
+		{"id":"g1f1","type":"file","file":"04 Данные и таблица.md","x":520,"y":340,"width":400,"height":260},
+		{"id":"g1f2","type":"file","file":"06 Настройки и хранение.md","x":520,"y":640,"width":400,"height":260},
+		{"id":"g2","type":"group","x":1000,"y":0,"width":440,"height":960,"label":"Вид и выпуск","color":"3"},
+		{"id":"g2f0","type":"file","file":"07 Внешний вид.md","x":1020,"y":40,"width":400,"height":260},
+		{"id":"g2f1","type":"file","file":"08 Выпуск и обновления.md","x":1020,"y":340,"width":400,"height":260},
+		{"id":"g2f2","type":"file","file":"10 Этапы и готовность.md","x":1020,"y":640,"width":400,"height":260},
+		{"id":"decisions","type":"file","file":"09 Решения и вопросы.md","x":1020,"y":-520,"width":400,"height":400,"color":"2"},
+		{"id":"src","type":"file","file":"Источники/Веб-страница.md","x":520,"y":1040,"width":400,"height":240},
+		{"id":"tab","type":"file","file":"Вкладки/Данные.md","x":20,"y":1040,"width":400,"height":240}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"passport","fromSide":"bottom","toNode":"g1f0","toSide":"top","label":"опции проекта"},
+		{"id":"e2","fromNode":"g1f0","fromSide":"bottom","toNode":"src","toSide":"top","label":"каждый источник — заметка"},
+		{"id":"e3","fromNode":"g0f1","fromSide":"bottom","toNode":"tab","toSide":"top","label":"каждая вкладка — заметка"}
+	]
+}

@@ -1,0 +1,96 @@
+<ui:FluentWindow
+  x:Class="StarterApp.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:views="clr-namespace:StarterApp.Views"
+  xmlns:vm="clr-namespace:StarterApp.ViewModels"
+  mc:Ignorable="d"
+  d:DataContext="{d:DesignInstance vm:MainViewModel}"
+  Title="{Binding Title}"
+  Width="1280" Height="780" MinWidth="820" MinHeight="500"
+  WindowStartupLocation="CenterScreen"
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="Mica"
+  WindowCornerPreference="Round"
+  Language="ru-RU">
+
+  <Window.InputBindings>
+    <KeyBinding Key="F5" Command="{Binding RunOrCancelCommand}" />
+    <KeyBinding Key="E" Modifiers="Control" Command="{Binding ExportExcelCommand}" />
+  </Window.InputBindings>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <ui:TitleBar Grid.Row="0" Title="{Binding Title}">
+      <ui:TitleBar.Icon>
+        <ui:ImageIcon Source="pack://application:,,,/Assets/app.ico" />
+      </ui:TitleBar.Icon>
+    </ui:TitleBar>
+
+    <!-- панель: сбор, состояние, меню -->
+    <Grid Grid.Row="1" Margin="16,4,16,10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <ui:Button Grid.Column="0" MinWidth="170"
+                 Appearance="Primary"
+                 Icon="{ui:SymbolIcon ArrowSync24}"
+                 Content="{Binding RunButtonText}"
+                 Command="{Binding RunOrCancelCommand}"
+                 ToolTip="Собрать данные сейчас (F5)" />
+
+      <StackPanel Grid.Column="1" Margin="16,0" VerticalAlignment="Center">
+        <TextBlock Text="{Binding StatusText}" TextTrimming="CharacterEllipsis"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+        <ProgressBar Width="420" Height="4" Margin="0,6,0,0" HorizontalAlignment="Left"
+                     Value="{Binding Progress}" IsIndeterminate="{Binding IsIndeterminate}"
+                     Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="2" Orientation="Horizontal">
+        <ui:Button Margin="0,0,8,0" Icon="{ui:SymbolIcon Settings24}" Content="Настройки" Click="OnSettings" />
+        <ui:Button Margin="0,0,8,0" MinWidth="40" Content="?" ToolTip="Справка (F1)" Click="OnHelp" />
+        <ui:Button x:Name="MoreButton" Icon="{ui:SymbolIcon MoreHorizontal24}" ToolTip="Ещё" Click="OnMore">
+          <ui:Button.ContextMenu>
+            <ContextMenu>
+              <MenuItem Header="В Excel" InputGestureText="Ctrl+E" Command="{Binding ExportExcelCommand}" />
+              <MenuItem Header="В CSV" Command="{Binding ExportCsvCommand}" />
+              <Separator />
+              <MenuItem Header="Папка данных" Command="{Binding OpenDataFolderCommand}" />
+              <MenuItem Header="Собрать всё заново…" Command="{Binding RecollectAllCommand}" />
+<!--#if (updates) -->
+              <Separator />
+              <MenuItem Header="Проверить обновления" Click="OnCheckUpdates" />
+<!--#endif -->
+            </ContextMenu>
+          </ui:Button.ContextMenu>
+        </ui:Button>
+      </StackPanel>
+    </Grid>
+
+    <TabControl x:Name="Tabs" Grid.Row="2" Margin="16,0,16,16">
+      <TabItem Header="Данные">
+        <views:ItemsView x:Name="ItemsTab" DataContext="{Binding Items}" />
+      </TabItem>
+<!--#if (charts) -->
+      <TabItem Header="График">
+        <views:ChartView DataContext="{Binding Items}" />
+      </TabItem>
+<!--#endif -->
+      <TabItem Header="{Binding Logs.Header}">
+        <views:LogsView DataContext="{Binding Logs}" />
+      </TabItem>
+    </TabControl>
+  </Grid>
+</ui:FluentWindow>

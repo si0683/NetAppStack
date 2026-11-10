@@ -1,0 +1,38 @@
+<Project>
+
+  <!-- все версии пакетов — здесь, в проектах только имена -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup Label="Каркас">
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.15" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.15" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.15" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.11.0" />
+    <PackageVersion Include="Serilog" Version="4.4.0" />
+    <PackageVersion Include="Serilog.Extensions.Hosting" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Интерфейс">
+    <PackageVersion Include="WPF-UI" Version="4.3.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="ScottPlot.WPF" Version="5.1.59" />
+    <PackageVersion Include="H.NotifyIcon.Wpf" Version="2.4.1" />
+    <PackageVersion Include="Velopack" Version="1.2.161" />
+  </ItemGroup>
+
+  <ItemGroup Label="Данные">
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.15" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+    <PackageVersion Include="AngleSharp" Version="1.10.1" />
+    <PackageVersion Include="ClosedXML" Version="0.105.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Тесты">
+    <PackageVersion Include="xunit.v3" Version="4.0.3" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

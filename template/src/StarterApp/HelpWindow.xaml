@@ -1,0 +1,44 @@
+<ui:FluentWindow
+  x:Class="StarterApp.HelpWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Title="Справка"
+  Width="640" Height="600"
+  WindowStartupLocation="CenterOwner"
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="Mica"
+  ShowInTaskbar="False">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <ui:TitleBar Grid.Row="0" Title="Справка" ShowMinimize="False" ShowMaximize="False" />
+    <!-- справка на одном экране: что делает программа и где что лежит -->
+    <ScrollViewer Grid.Row="1" Padding="24,4,24,20" VerticalScrollBarVisibility="Auto">
+      <StackPanel>
+        <TextBlock x:Name="Header" FontSize="20" FontWeight="SemiBold" />
+        <TextBlock Margin="0,12,0,0" TextWrapping="Wrap" LineHeight="22">
+          <Run FontWeight="SemiBold">Сбор.</Run> Программа сама собирает данные сразу после запуска и потом по расписанию (интервал — в «Настройках»).
+          «Обновить сейчас» (F5) — собрать сразу; во время сбора кнопка становится «Отменой». Уже собранное при отмене и закрытии остаётся.
+          <LineBreak /><LineBreak />
+          <Run FontWeight="SemiBold">Данные.</Run> Новые сверху; появившиеся за сутки — жирным. Щелчок по заголовку — сортировка, Shift + щелчок — вторая колонка.
+          «Колонки» — скрыть лишние; колонки перетаскиваются и меняют ширину. Статус и заметка редактируются прямо в таблице и сохраняются сразу.
+          Двойной щелчок по строке — открыть ссылку. Ctrl+C — копия выделенных строк с заголовками.
+          <LineBreak /><LineBreak />
+          <Run FontWeight="SemiBold">Выгрузка.</Run> Меню «⋯» → «В Excel» (Ctrl+E) или «В CSV»: строки текущего фильтра в текущем порядке, видимые колонки.
+          Файлы — в папке data\reports.
+          <LineBreak /><LineBreak />
+          <Run FontWeight="SemiBold">Логи.</Run> Что программа делает: сборы, отказы источников, ошибки. Полные логи за 30 дней — в data\logs.
+          <LineBreak /><LineBreak />
+          <Run FontWeight="SemiBold">Где файлы.</Run> Всё в папке data рядом с программой: база, настройки (settings.json), логи, выгрузки.
+          Перенос на другой компьютер — скопировать папку целиком.
+        </TextBlock>
+        <TextBlock Margin="0,16,0,0">
+          <Hyperlink Click="OnRepo">Страница программы</Hyperlink>
+        </TextBlock>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</ui:FluentWindow>

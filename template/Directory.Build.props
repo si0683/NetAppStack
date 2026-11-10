@@ -1,0 +1,32 @@
+<Project>
+
+  <!-- общие настройки всех проектов решения -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NeutralLanguage>ru-RU</NeutralLanguage>
+    <SatelliteResourceLanguages>ru;en</SatelliteResourceLanguages>
+    <Company>COMPANY_NAME</Company>
+    <Authors>COMPANY_NAME</Authors>
+    <Copyright>© COMPANY_NAME</Copyright>
+    <RepositoryUrl>https://github.com/OWNER/REPO</RepositoryUrl>
+    <!-- версия: при выпуске задаётся тегом (v1.2.0 → -p:Version=1.2.0) -->
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <!-- выпуск: отладочные символы внутри dll/exe, без отдельных .pdb рядом с программой -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+<!--#if (false) -->
+
+  <!-- только для работы над шаблоном на месте: включены все опции.
+       В созданный проект этот блок не попадает. -->
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);sqlite;charts;tray;updates</DefineConstants>
+  </PropertyGroup>
+<!--#endif -->
+
+</Project>

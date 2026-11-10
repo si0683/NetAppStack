@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "si0683",
+  "classifications": [ "Desktop", "WPF", "Windows" ],
+  "identity": "NetAppStack.Wpf",
+  "name": "NetAppStack: настольная программа WPF",
+  "description": "Программа для Windows с фоновым сбором данных, таблицей, логами, настройками, Excel и выпуском одним exe.",
+  "shortName": "netapp",
+  "sourceName": "StarterApp",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "symbols": {
+    "db": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "sqlite",
+      "description": "База данных",
+      "choices": [
+        { "choice": "sqlite", "description": "SQLite — файл рядом с программой" },
+        { "choice": "postgres", "description": "PostgreSQL — строка подключения в настройках" }
+      ]
+    },
+    "sqlite": { "type": "computed", "value": "(db == \"sqlite\")" },
+    "postgres": { "type": "computed", "value": "(db == \"postgres\")" },
+    "charts": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Вкладка «График» (ScottPlot)"
+    },
+    "tray": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Значок в трее и уведомления о новых записях (H.NotifyIcon)"
+    },
+    "updates": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Установщик и автообновление из GitHub Releases (Velopack)"
+    },
+    "repo": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "https://github.com/OWNER/REPO",
+      "replaces": "https://github.com/OWNER/REPO",
+      "description": "Адрес репозитория GitHub (для ссылок и обновлений)"
+    },
+    "company": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "COMPANY",
+      "replaces": "COMPANY_NAME",
+      "description": "Автор / компания в свойствах exe"
+    },
+    "appGuid": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "6a1f3c52-9d7e-4b8a-a1f0-3e2d5c7b9f10",
+      "parameters": { "defaultFormat": "D" }
+    }
+  },
+  "sources": [
+    {
+      "exclude": [
+        "**/bin/**",
+        "**/obj/**",
+        "**/.vs/**",
+        "**/*.user",
+        "**/*.received.*",
+        ".template.config/**"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!charts)",
+          "exclude": [ "src/StarterApp/Views/ChartView.xaml", "src/StarterApp/Views/ChartView.xaml.cs" ]
+        },
+        {
+          "condition": "(!tray)",
+          "exclude": [ "src/StarterApp/Services/TrayService.cs" ]
+        },
+        {
+          "condition": "(!updates)",
+          "exclude": [ "src/StarterApp/Services/UpdateService.cs", ".github/workflows/release-velopack.yml" ]
+        },
+        {
+          "condition": "(updates)",
+          "exclude": [ ".github/workflows/release.yml" ],
+          "rename": { ".github/workflows/release-velopack.yml": ".github/workflows/release.yml" }
+        }
+      ]
+    }
+  ],
+  "postActions": []
+}

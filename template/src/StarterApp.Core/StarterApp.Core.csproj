@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- логика без интерфейса: база, сборщики, настройки, выгрузка. Тестируется без окна. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>StarterApp.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="StarterApp.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+<!--#if (sqlite) -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+<!--#endif -->
+<!--#if (postgres) -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+<!--#endif -->
+    <PackageReference Include="AngleSharp" />
+    <PackageReference Include="ClosedXML" />
+  </ItemGroup>
+
+</Project>

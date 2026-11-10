@@ -1,0 +1,8 @@
+<UserControl
+  x:Class="StarterApp.Views.ChartView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:scottplot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF">
+  <!-- ScottPlot: колёсико — масштаб, перетаскивание — сдвиг, двойной щелчок — сброс -->
+  <scottplot:WpfPlot x:Name="Plot" Margin="0,12,0,0" />
+</UserControl>

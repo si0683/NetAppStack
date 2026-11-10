@@ -1,0 +1,28 @@
+# Выпуск: git tag v1.2.0 && git push --tags → тесты → один exe → GitHub Releases
+name: release
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Тесты
+        run: dotnet test --solution StarterApp.slnx -c Release
+      - name: Сборка exe
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          dotnet publish src/StarterApp/StarterApp.csproj -c Release -p:Version=$version -o publish
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: publish/StarterApp.exe
+          generate_release_notes: true

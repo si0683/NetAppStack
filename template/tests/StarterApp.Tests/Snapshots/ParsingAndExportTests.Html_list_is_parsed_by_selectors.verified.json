@@ -1,0 +1,32 @@
+[
+  {
+    "ExternalId": "https://example.com/objects/101",
+    "Title": "Ремонт дороги по ул. Мира",
+    "Category": "Дороги",
+    "Location": null,
+    "Amount": null,
+    "Phone": null,
+    "Url": "https://example.com/objects/101",
+    "PublishedAt": "2026-11-03T09:30:00Z"
+  },
+  {
+    "ExternalId": "https://other.example.org/x/7",
+    "Title": "Снос дома № 7",
+    "Category": "Демонтаж",
+    "Location": null,
+    "Amount": null,
+    "Phone": null,
+    "Url": "https://other.example.org/x/7",
+    "PublishedAt": "2026-11-05T00:00:00Z"
+  },
+  {
+    "ExternalId": "A043C23139C08380",
+    "Title": "Без ссылки: благоустройство сквера",
+    "Category": null,
+    "Location": null,
+    "Amount": null,
+    "Phone": null,
+    "Url": null,
+    "PublishedAt": null
+  }
+]

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- пакет шаблона: dotnet pack NetAppStack.csproj -c Release -o nupkg -->
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageId>NetAppStack</PackageId>
+    <Version>1.0.0</Version>
+    <Title>NetAppStack — настольная программа WPF</Title>
+    <Authors>si0683</Authors>
+    <Description>dotnet new netapp — программа для Windows на .NET 10 и WPF (WPF-UI): фоновый сбор данных, таблица со статусами, логи, настройки, Excel, графики, трей, автообновление, выпуск одним exe.</Description>
+    <PackageTags>dotnet-new;templates;wpf;wpf-ui;desktop;windows;mvvm</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/si0683/NetAppStack</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/si0683/NetAppStack</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <!-- без этого NuGet выбросит .template.config, .gitignore, .github -->
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <NoWarn>$(NoWarn);NU5128;NU5110;NU5111</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="template/**/*"
+             Exclude="template/**/bin/**;template/**/obj/**;template/**/.vs/**;template/**/*.user;template/**/*.received.*;template/**/data/**" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

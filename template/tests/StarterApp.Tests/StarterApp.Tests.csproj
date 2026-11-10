@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- тесты ядра без окна: dotnet test -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>StarterApp.Tests</RootNamespace>
+    <!-- в тестах токен отмены xUnit не обязателен -->
+    <NoWarn>$(NoWarn);xUnit1051</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/StarterApp.Core/StarterApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="Shouldly" />
+    <!-- тесты всегда на SQLite в памяти — быстро и без сервера -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Fixtures/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
